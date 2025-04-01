@@ -1,0 +1,14 @@
+/* Responsive design */
+@media (max-width: 768px) {
+    header {
+        text-align: center;
+    }
+
+    .intro {
+        padding: 20px;
+    }
+
+    footer {
+        font-size: 14px;
+    }
+}
