@@ -1,0 +1,81 @@
+/* Login.css */
+
+/* Style pour le conteneur principal de la page de connexion (optionnel, car Bootstrap gère déjà beaucoup) */
+.login-page-container {
+  /* Vous pouvez ajouter des styles spécifiques ici si nécessaire */
+  /* Exemple: background: linear-gradient(to bottom, #007bff, #0056b3); */
+}
+
+/* Style pour la boîte blanche contenant le formulaire */
+.login-form-container {
+  /* Bootstrap fournit déjà bg-white, p-3, rounded, w-25. */
+  /* Vous pouvez ajouter/modifier ici : */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  min-width: 300px; /* Assurer une largeur minimale */
+  /* width: 30%; */ /* Alternative à w-25 si vous préférez */
+}
+
+/* Style pour le titre "Sign-In" */
+.login-form-container h2 {
+  text-align: center;
+  margin-bottom: 1.5rem; /* Espace sous le titre */
+  color: #333;
+}
+
+/* Style général pour les groupes de formulaire (label + input) */
+.login-form-container .mb-3 {
+  /* Bootstrap ajoute déjà margin-bottom. Vous pouvez ajuster si besoin. */
+}
+
+/* Style pour les labels */
+.login-form-container label {
+  font-weight: bold; /* Déjà fait par <strong>, mais bon à avoir */
+  margin-bottom: 0.3rem;
+  display: block; /* Assure que le label est au-dessus de l'input */
+  color: #555;
+}
+
+/* Style pour les champs de saisie */
+.login-form-container input.form-control {
+  /* Bootstrap fournit déjà des styles de base */
+  /* Vous pouvez ajouter : */
+  border-radius: 4px; /* Arrondir les coins si vous n'aimez pas rounded-0 */
+  border: 1px solid #ccc;
+  padding: 0.75rem;
+}
+
+/* Style pour les champs de saisie lorsqu'ils ont le focus */
+.login-form-container input.form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  outline: none;
+}
+
+/* Style pour le bouton de soumission principal */
+.login-form-container button.btn-success {
+  /* Bootstrap fournit déjà des styles */
+  padding: 0.75rem;
+  font-size: 1rem;
+  border-radius: 4px; /* Arrondir les coins */
+  margin-top: 1rem; /* Espace au-dessus du bouton */
+}
+
+/* Style pour le paragraphe "You agree..." */
+.login-form-container p {
+  font-size: 0.85rem;
+  color: #666;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+/* Style pour le lien "Create Account" (stylé comme un bouton) */
+.login-form-container .btn-default {
+  /* Bootstrap fournit déjà des styles */
+  border-radius: 4px; /* Arrondir les coins */
+}
+
+/* Style pour les messages d'erreur (si vous utilisez la classe alert) */
+.login-form-container .alert-danger {
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
