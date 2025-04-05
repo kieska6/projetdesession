@@ -1,3 +1,46 @@
+/* App.css */
+
+/* Réinitialisations de base et styles globaux */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f4f7f6; /* Une couleur de fond générale douce */
+  color: #333; /* Couleur de texte par défaut */
+}
+
+/* Assurer que les éléments prennent en compte padding et border dans leur taille totale */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Styles de liens globaux (optionnel, Bootstrap gère beaucoup) */
+a {
+  /* color: #007bff; */
+  /* text-decoration: none; */ /* Supprimer le soulignement par défaut */
+}
+
+a:hover {
+  /* text-decoration: underline; */ /* Souligner au survol */
+}
+
+/* Vous pouvez ajouter ici des styles pour des éléments communs */
+/* comme un header ou un footer si vous en ajoutez dans App.js */
+/*
+.app-header {
+  background-color: #fff;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+*/
+
+/* Supprimer ou commenter les styles par défaut de create-react-app s'ils existent encore */
+/*
 .App {
   text-align: center;
 }
@@ -36,3 +79,4 @@
     transform: rotate(360deg);
   }
 }
+*/
