@@ -1,74 +1,121 @@
 /* Signup.css */
 
-/* Style pour le conteneur principal de la page d'inscription */
+/* Conteneur pleine page pour le formulaire d'inscription */
+/* NOTE: Vos classes Bootstrap (d-flex, vh-100, bg-primary) font déjà cela. */
 .signup-page-container {
-  /* background: linear-gradient(to bottom, #28a745, #218838); */
+  /* background: linear-gradient(135deg, #4cc9f0 0%, #3f37c9 100%); */ /* Exemple de fond différent */
+  /* background-color: var(--secondary); */ /* Alternative */
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
 }
 
-/* Style pour la boîte blanche contenant le formulaire */
-.signup-form-container {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  min-width: 300px;
-  /* width: 30%; */
+/* La carte/boîte blanche contenant le formulaire */
+/* Remplace ou complète les classes Bootstrap .bg-white, .p-3, .rounded, .w-25 */
+.signup-auth-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 450px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-/* Style pour le titre "Sign-Up" */
-.signup-form-container h2 {
+.signup-auth-card h2 {
+  margin-bottom: 2rem;
   text-align: center;
+  color: var(--dark);
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+/* Style pour les groupes label + input */
+.signup-form-group {
   margin-bottom: 1.5rem;
-  color: #333;
 }
 
-/* Style pour les groupes de formulaire */
-.signup-form-container .mb-3 {
-  /* Ajustements si nécessaire */
-}
-
-/* Style pour les labels */
-.signup-form-container label {
-  font-weight: bold;
-  margin-bottom: 0.3rem;
+.signup-form-group label {
   display: block;
-  color: #555;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--dark);
 }
 
-/* Style pour les champs de saisie */
-.signup-form-container input.form-control {
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  padding: 0.75rem;
+/* Style pour les champs input */
+/* Remplace ou complète .form-control */
+.signup-form-group input {
+  width: 100%;
+  padding: 0.9rem 1.2rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s;
 }
 
-/* Style pour les champs de saisie au focus */
-.signup-form-container input.form-control:focus {
-  border-color: #28a745; /* Couleur verte pour correspondre au bouton ? */
-  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+.signup-form-group input:focus {
+  border-color: var(--primary); /* Ou var(--success) pour différencier ? */
+  box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
   outline: none;
 }
 
-/* Style pour le bouton de soumission principal */
-.signup-form-container button.btn-success {
-  padding: 0.75rem;
+/* Styles pour les boutons dans le formulaire d'inscription */
+/* Remplace ou complète .btn, .btn-success, .btn-default */
+.signup-btn {
+  display: inline-flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: 0.9rem 1.8rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  border: none;
   font-size: 1rem;
-  border-radius: 4px;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
+}
+
+/* Bouton principal d'inscription */
+.signup-btn-primary {
+  background-color: var(--success); /* Utilise la couleur success */
+  color: white;
+}
+
+.signup-btn-primary:hover {
+  background-color: #3db8da; /* Version un peu plus foncée de success */
+  transform: translateY(-2px);
+}
+
+/* Style pour le bouton "Login" (lien stylé) */
+.signup-btn-secondary {
+  background-color: white;
+  color: var(--primary);
+  border: 1px solid var(--primary);
+}
+
+.signup-btn-secondary:hover {
+  background-color: rgba(67, 97, 238, 0.05);
 }
 
 /* Style pour le paragraphe "You agree..." */
-.signup-form-container p {
+.signup-terms-text {
   font-size: 0.85rem;
   color: #666;
   text-align: center;
-  margin-top: 1rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
 }
 
-/* Style pour le lien "Login" (stylé comme un bouton) */
-.signup-form-container .btn-default {
-  border-radius: 4px;
-}
-
-/* Style pour les messages d'erreur */
-.signup-form-container .alert-danger {
-  border-radius: 4px;
-  font-size: 0.9rem;
+/* Responsive pour la carte d'inscription */
+@media (max-width: 768px) {
+  .signup-auth-card {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+   .signup-auth-card h2 {
+     font-size: 1.5rem;
+  }
 }

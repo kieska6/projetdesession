@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './Login.css';
 import { Link, useNavigate } from 'react-router-dom';
 
 function Login() {
@@ -18,7 +19,6 @@ function Login() {
         setError('');
 
         try {
-            // URL de votre script PHP login
             const apiUrl = 'http://localhost/projetdesession/projetdesession/api/login.php'; // Adaptez le chemin
 
             const response = await fetch(apiUrl, {

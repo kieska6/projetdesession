@@ -1,0 +1,66 @@
+/* src/Alumni.css */
+
+.alumni-page {
+    border-left: 5px solid #17a2b8; /* Cyan/Teal */
+    background-color: #f2fcfd;
+  }
+  
+  .alumni-page h1 {
+    color: #138496; /* Teal foncé */
+    border-bottom: 2px solid #17a2b8;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .alumni-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  
+  .alumni-card {
+    background-color: #ffffff;
+    border: 1px solid #bee5eb;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .alumni-card:hover {
+     transform: translateY(-5px); /* Léger effet au survol */
+  }
+  
+  .alumni-card h3 {
+    color: var(--primary-dark);
+    margin-bottom: 0.8rem;
+  }
+  
+  .alumni-card p {
+    margin-bottom: 0.5rem;
+    color: #555;
+    font-size: 0.95rem;
+  }
+  
+  .alumni-card strong {
+    color: #333;
+  }
+  
+  .linkedin-link {
+    display: inline-block; /* Permet margin-top */
+    margin-top: 1rem;
+    background-color: #0077b5; /* Couleur LinkedIn */
+    color: white !important; /* Force la couleur */
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .linkedin-link:hover {
+    background-color: #005582; /* LinkedIn plus foncé */
+    text-decoration: none;
+  }

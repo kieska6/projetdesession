@@ -1,0 +1,51 @@
+/* src/Admin.css */
+
+/* Styles spécifiques pour la page Admin */
+.admin-page {
+    /* Vous pouvez surcharger ou ajouter des styles à ceux de .page */
+    border-left: 5px solid var(--danger); /* Bordure distinctive pour la section admin */
+    background-color: #fff8f8; /* Léger fond rosé pour distinguer */
+  }
+  
+  .admin-page h1 {
+    color: var(--danger); /* Utiliser la couleur danger pour le titre principal */
+    border-bottom: 2px solid var(--danger);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Styles pour les sections spécifiques dans la page admin */
+  .admin-section {
+    background-color: #ffffff; /* Fond blanc pour les sections internes */
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  }
+  
+  .admin-section h2 {
+    color: var(--primary-dark); /* Couleur pour les sous-titres */
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+  }
+  
+  /* Style pour les boutons spécifiques à l'admin */
+  .admin-button {
+    /* Hérite potentiellement de .btn si vous l'appliquez aussi */
+    /* Styles spécifiques ou surcharges */
+    background-color: var(--danger);
+    color: white;
+    padding: 0.7rem 1.2rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: 500;
+  }
+  
+  .admin-button:hover {
+    background-color: #d90429; /* Version plus foncée de --danger */
+  }
+  
+  /* Ajoutez d'autres styles spécifiques nécessaires pour les tableaux, formulaires, etc. */

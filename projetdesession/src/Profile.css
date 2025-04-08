@@ -1,0 +1,104 @@
+/* src/Profile.css */
+
+.profile-page {
+    border-left: 5px solid var(--primary);
+    background-color: #f5f7ff;
+  }
+  
+  .profile-page h1 {
+    color: var(--primary);
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .profile-display,
+  .profile-form {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    border: 1px solid #d9e2ff;
+    margin-top: 1.5rem;
+  }
+  
+  .profile-display p {
+    margin-bottom: 0.8rem;
+    line-height: 1.6;
+    color: #333;
+  }
+  
+  .profile-display strong {
+    color: #000;
+    margin-right: 0.5em;
+    min-width: 120px; /* Aligne un peu les valeurs */
+    display: inline-block;
+  }
+  
+  /* Styles pour le formulaire d'édition */
+  .profile-form .form-group {
+    margin-bottom: 1rem;
+  }
+  
+  .profile-form label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-weight: 500;
+  }
+  
+  .profile-form input[type="text"],
+  .profile-form input[type="email"],
+  .profile-form textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+  
+  .profile-form textarea {
+    resize: vertical;
+  }
+  
+  .profile-actions {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 1rem; /* Espace entre les boutons */
+  }
+  
+  /* Styles généraux pour les boutons de profil */
+  .profile-btn {
+    padding: 0.7rem 1.2rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    font-size: 0.9rem;
+  }
+  
+  .edit-btn {
+    background-color: var(--primary);
+    color: white;
+  }
+  .edit-btn:hover {
+    background-color: var(--primary-dark);
+  }
+  
+  .save-btn {
+    background-color: var(--success);
+    color: white;
+  }
+  .save-btn:hover {
+    background-color: #3db8da;
+  }
+  
+  .cancel-btn {
+    background-color: #6c757d; /* Gris */
+    color: white;
+  }
+  .cancel-btn:hover {
+    background-color: #5a6268;
+  }
+  
+  /* Réutilisation des badges de rôle définis dans App.css */
+  /* Assurez-vous que App.css est importé globalement */

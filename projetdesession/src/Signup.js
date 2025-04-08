@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './Signup.css';
 import { Link, useNavigate } from 'react-router-dom'; // Importer useNavigate
 
 function Signup() {

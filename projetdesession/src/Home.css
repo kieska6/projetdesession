@@ -1,0 +1,97 @@
+/* Home.css */
+
+/* Conteneur spécifique pour la page d'accueil, si besoin de styles uniques */
+.home-container {
+    /* Hérite des styles .page de App.css */
+    /* Ajoutez des styles spécifiques ici si nécessaire */
+  }
+  
+  /* Style pour la section bannière */
+  .home-banner {
+    position: relative; /* Nécessaire pour positionner le texte par-dessus */
+    text-align: center;
+    color: white;
+    margin-bottom: 2rem; /* Espace après la bannière */
+    border-radius: 12px; /* Correspond au radius de .page */
+    overflow: hidden; /* Assure que l'image ne dépasse pas les coins arrondis */
+  }
+  
+  /* Style pour l'image de la bannière */
+  .banner-image {
+    display: block; /* Supprime l'espace sous l'image */
+    width: 100%;
+    height: auto; /* Maintient le ratio */
+    max-height: 400px; /* Limite la hauteur */
+    object-fit: cover; /* Assure que l'image couvre la zone sans se déformer */
+  }
+  
+  /* Style pour le texte superposé sur la bannière */
+  .banner-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.6); /* Fond sombre semi-transparent */
+    padding: 1.5rem 2.5rem;
+    border-radius: 8px;
+    width: 80%; /* Prend 80% de la largeur de la bannière */
+    max-width: 700px; /* Limite la largeur maximale du texte */
+  }
+  
+  .banner-text h2 {
+    margin-bottom: 0.5rem;
+    font-size: 2rem; /* Taille de titre adaptée */
+    color: white; /* Assure que le texte est blanc */
+  }
+  
+  .banner-text p {
+    font-size: 1.1rem;
+    margin-bottom: 0; /* Annule le margin par défaut */
+    color: white; /* Assure que le texte est blanc */
+  }
+  
+  /* Style pour le message invitant à se connecter */
+  .login-prompt {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 1.1em;
+    padding: 1rem;
+    background-color: #eef2f7; /* Fond léger pour le message */
+    border-radius: 8px;
+  }
+  
+  .login-prompt a {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  
+  .login-prompt a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Styles pour d'autres sections de la page d'accueil */
+  .home-about-section {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #eee;
+  }
+  
+  .home-about-section h3 {
+    color: var(--primary);
+    margin-bottom: 1rem;
+  }
+  
+  /* Responsive pour la bannière */
+  @media (max-width: 768px) {
+    .banner-text {
+      padding: 1rem 1.5rem;
+      width: 90%;
+    }
+    .banner-text h2 {
+      font-size: 1.5rem;
+    }
+    .banner-text p {
+      font-size: 1rem;
+    }
+  }

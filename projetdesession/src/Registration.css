@@ -1,0 +1,68 @@
+/* src/Registration.css */
+
+.registration-page {
+    border-left: 5px solid var(--primary); /* Couleur distinctive */
+    background-color: #f5f7ff; /* Fond léger bleu */
+  }
+  
+  .registration-page h1 {
+    color: var(--primary);
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .registration-form {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    border: 1px solid #d9e2ff;
+    margin-top: 1.5rem;
+  }
+  
+  /* Styles de formulaire (similaires à Contact.css) */
+  .registration-form .form-group {
+    margin-bottom: 1rem;
+  }
+  
+  .registration-form label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-weight: 500;
+  }
+  
+  .registration-form input[type="text"],
+  .registration-form input[type="email"],
+  .registration-form select,
+  .registration-form textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: white; /* Assure fond blanc pour select */
+  }
+  
+  .registration-form select {
+     height: calc(1.6em + 1.6rem + 2px); /* Ajuste hauteur select */
+  }
+  
+  .registration-form textarea {
+    resize: vertical;
+  }
+  
+  .registration-submit-btn {
+    background-color: var(--primary);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: 500;
+    font-size: 1rem;
+  }
+  
+  .registration-submit-btn:hover {
+    background-color: var(--primary-dark);
+  }
