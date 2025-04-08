@@ -1,0 +1,58 @@
+/* src/Etudiant.css */
+
+/* Styles spécifiques pour la page Étudiant */
+.etudiant-page {
+    /* Vous pouvez surcharger ou ajouter des styles à ceux de .page */
+    border-left: 5px solid var(--success); /* Bordure distinctive pour la section étudiant */
+    background-color: #f8fff8; /* Léger fond verdâtre pour distinguer */
+  }
+  
+  .etudiant-page h1 {
+    color: var(--success); /* Utiliser la couleur success pour le titre principal */
+    border-bottom: 2px solid var(--success);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Styles pour les sections spécifiques dans la page étudiant */
+  .etudiant-section {
+    background-color: #ffffff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  }
+  
+  .etudiant-section h2 {
+    color: var(--primary); /* Couleur pour les sous-titres */
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+  }
+  
+  /* Style pour les listes dans les sections étudiant */
+  .etudiant-section ul {
+    list-style: disc; /* Style de puce standard */
+    margin-left: 1.5rem; /* Indentation de la liste */
+    margin-bottom: 1rem;
+  }
+  
+  .etudiant-section li {
+    margin-bottom: 0.5rem;
+    color: #555;
+  }
+  
+  /* Style pour les liens spécifiques à l'étudiant */
+  .etudiant-link {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  
+  .etudiant-link:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+  }
+  
+  /* Ajoutez d'autres styles spécifiques nécessaires pour les tableaux de notes, calendriers, etc. */

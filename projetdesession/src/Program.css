@@ -1,0 +1,28 @@
+/* src/Program.css */
+
+.program-page {
+    border-left: 5px solid var(--info); /* Couleur distinctive */
+    background-color: #f7faff; /* Fond léger bleuâtre */
+  }
+  
+  .program-page h1 {
+    color: var(--info);
+    border-bottom: 2px solid var(--info);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .program-page section {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 8px;
+    border: 1px solid #e0e7ff;
+  }
+  
+  .program-page h2 {
+    color: var(--primary-dark);
+    margin-bottom: 0.8rem;
+  }
+  
+  /* Ajoutez d'autres styles spécifiques ici */
