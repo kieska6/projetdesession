@@ -1,103 +1,124 @@
-/* Style global pour la page de connexion */
-body {
-  margin: 0;
-  font-family: 'Arial', sans-serif;
-  background-color: #f0f8ff; /* Couleur de fond douce */
-}
+/* Login.css */
+/* Styles rendus similaires à Signup.css */
 
-/* Centrage de la page */
-.d-flex {
+/* Conteneur pleine page pour le formulaire de connexion */
+/* NOTE: Vos classes Bootstrap (d-flex, vh-100, etc.) peuvent déjà faire cela. */
+/* Adaptez en fonction de si vous utilisez ces classes ou ce CSS. */
+.login-page-container {
+  /* Exemple de fond - peut être identique ou différent de signup */
+  /* background: linear-gradient(135deg, #4361ee 0%, #3a56d4 100%); */
+  /* background-color: var(--primary); */ /* Alternative */
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 1rem; /* Pour les petits écrans */
 }
 
-.vh-100 {
-  height: 100vh;
+/* La carte/boîte blanche contenant le formulaire */
+/* Remplace ou complète les classes Bootstrap .bg-white, .p-3, .rounded, etc. */
+.login-auth-card {
+  background: white;
+  border-radius: 16px; /* Identique à signup */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Identique à signup */
+  padding: 2.5rem; /* Identique à signup */
+  width: 100%;
+  max-width: 450px; /* Identique à signup */
+  border: 1px solid rgba(0, 0, 0, 0.05); /* Identique à signup */
 }
 
-/* Style du conteneur principal */
-.bg-primary {
-  background-color: #007bff; /* Couleur bleue cohérente avec App.js */
-}
-
-.bg-white {
-  background-color: #ffffff;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Ombre douce */
-  border-radius: 10px; /* Coins arrondis */
-}
-
-/* Marges et espacements */
-.p-3 {
-  padding: 20px;
-}
-
-.w-25 {
-  width: 350px; /* Largeur fixe pour un design compact */
-}
-
-/* Style du titre */
-h2 {
+.login-auth-card h2 {
+  margin-bottom: 2rem; /* Identique à signup */
   text-align: center;
-  color: #333333; /* Texte sombre */
-  font-size: 24px;
+  color: var(--dark);
+  font-size: 1.8rem;
+  font-weight: 700; /* Identique à signup */
 }
 
-/* Style des boutons */
-.btn-success {
-  background-color: #28a745; /* Vert pour le bouton "Se connecter" */
-  color: #ffffff;
+/* Style pour les groupes label + input */
+.login-form-group {
+  margin-bottom: 1.5rem; /* Identique à signup */
 }
 
-.btn-success:hover {
-  background-color: #218838; /* Vert plus foncé au survol */
+.login-form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--dark); /* Identique à signup */
 }
 
-.btn-default {
-  border-color: #cccccc; /* Bordure grise pour le bouton "Créer un compte" */
+/* Style pour les champs input */
+/* Remplace ou complète .form-control */
+.login-form-group input {
+  width: 100%;
+  padding: 0.9rem 1.2rem; /* Identique à signup */
+  border: 1px solid #e0e0e0; /* Identique à signup */
+  border-radius: 8px; /* Identique à signup */
+  font-size: 1rem;
+  transition: all 0.3s; /* Identique à signup */
 }
 
-.btn-default:hover {
-  background-color: #e6e6e6; /* Fond gris clair au survol */
+.login-form-group input:focus {
+  border-color: var(--primary); /* Couleur focus standard */
+  box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2); /* Identique à signup (avec couleur primary) */
+  outline: none;
 }
 
-/* Style des champs de formulaire */
-.form-control {
-  border-radius: 5px; /* Coins arrondis pour les champs de texte */
+/* Styles pour les boutons dans le formulaire de connexion */
+/* Remplace ou complète .btn, .btn-success, .btn-default */
+.login-btn {
+  display: inline-flex; /* Ou block selon besoin */
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: 0.9rem 1.8rem; /* Identique à signup */
+  border-radius: 8px; /* Identique à signup */
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  border: none;
+  font-size: 1rem;
+  margin-top: 0.5rem; /* Identique à signup */
 }
 
-.rounded-0 {
-  border-radius: 0; /* Supprime les coins arrondis (si nécessaire) */
+/* Bouton principal de connexion */
+.login-btn-primary {
+  background-color: var(--primary); /* Couleur primaire pour la connexion */
+  color: white;
 }
 
-/.mb-3 label {
-  font-weight: bold;
+.login-btn-primary:hover {
+  background-color: var(--primary-dark); /* Version foncée de primary */
+  transform: translateY(-2px); /* Identique à signup */
 }
 
-/* Style des alertes d'erreur */
-.alert-danger {
-  color: #721c24;
-  background-color: #f8d7da;
-  border-color: #f5c6cb;
-  padding: 10px;
-  margin-bottom: 15px;
+/* Style pour le bouton "Create Account" (lien stylé) */
+.login-btn-secondary {
+  background-color: white;
+  color: var(--primary);
+  border: 1px solid var(--primary); /* Identique à signup */
 }
 
-/* Lien "Créer un compte" */
-.text-decoration-none {
-  text-decoration: none;
+.login-btn-secondary:hover {
+  background-color: rgba(67, 97, 238, 0.05); /* Identique à signup */
 }
 
-.bg-light {
-  background-color: #f8f9fa !important; /* Fond gris clair pour le bouton secondaire */
+/* Style pour le paragraphe "You agree..." (si vous l'avez sur la page login) */
+.login-terms-text {
+  font-size: 0.85rem;
+  color: #666;
+  text-align: center;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem; /* Identique à signup */
 }
 
-.bg-light:hover {
-  background-color: #e2e6ea !important; /* Fond légèrement plus foncé au survol */
-}
-
-/* Texte des conditions (p) */
-p {
-  font-size: 12px;
-  color: #666666; /* Couleur grise douce pour le texte des conditions */
+/* Responsive pour la carte de connexion */
+@media (max-width: 768px) {
+  .login-auth-card {
+    padding: 1.5rem; /* Identique à signup */
+    margin: 1rem; /* Identique à signup */
+  }
+   .login-auth-card h2 {
+     font-size: 1.5rem; /* Identique à signup */
+  }
 }

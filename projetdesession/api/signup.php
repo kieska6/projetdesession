@@ -1,69 +1,95 @@
 <?php
-// Autoriser les requêtes depuis votre serveur de développement React (IMPORTANT pour CORS)
-header("Access-Control-Allow-Origin: http://localhost:3000"); // Adaptez le port si nécessaire
+header("Access-Control-Allow-Origin: *"); // Permet les requêtes depuis n'importe quelle origine (pour le développement)
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
+header('Content-Type: application/json');
 
-// Gérer la requête OPTIONS (pré-vérification CORS)
-if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
-    exit(0);
-}
-
-// Connexion à la base de données (Adaptez avec vos identifiants)
+// Connexion à la base de données (adaptez avec vos informations)
 $servername = "localhost";
 $username = "root"; // Utilisateur par défaut de XAMPP
-$password = ""; // Mot de passe par défaut de XAMPP (souvent vide)
-$dbname = "projetdesession";
+$password = ""; // Mot de passe par défaut de XAMPP (vide)
+$dbname = "projetdesession"; // Remplacez par le nom de votre DB
 
 // Créer la connexion
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Vérifier la connexion
 if ($conn->connect_error) {
-    // En cas d'erreur de connexion, renvoyer une erreur HTTP
-    http_response_code(500);
-    echo json_encode(['message' => 'Erreur de connexion à la base de données: ' . $conn->connect_error]);
+    echo json_encode(['status' => 'error', 'message' => 'Connection failed: ' . $conn->connect_error]);
     exit();
 }
 
-// Récupérer les données envoyées par React (supposons qu'elles sont en JSON)
-$input = json_decode(file_get_contents('php://input'), true);
+// Récupérer les données POST
+// Assurez-vous que les données sont envoyées en JSON depuis React
+$data = json_decode(file_get_contents('php://input'), true);
 
-// Vérifier si les données nécessaires sont présentes
-if (!isset($input['name']) || !isset($input['email']) || !isset($input['password'])) {
-    http_response_code(400); // Bad Request
-    echo json_encode(['message' => 'Données manquantes']);
+// Vérifier si les données sont bien reçues
+if (!$data || !isset($data['name']) || !isset($data['email']) || !isset($data['password'])) {
+    echo json_encode(['status' => 'error', 'message' => 'Invalid input data']);
     exit();
 }
 
-$name = $input['name'];
-$email = $input['email'];
-$password = $input['password']; // !! IMPORTANT: Hasher le mot de passe avant de le stocker
+$name = trim($data['name']);
+$email = trim($data['email']);
+$password = trim($data['password']);
 
-// --- SÉCURITÉ CRUCIALE : Hacher le mot de passe ---
+// Validation simple côté serveur (vous pouvez ajouter plus de validation)
+if (empty($name) || empty($email) || empty($password)) {
+    echo json_encode(['status' => 'error', 'message' => 'Please fill all fields']);
+    exit();
+}
+
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    echo json_encode(['status' => 'error', 'message' => 'Invalid email format']);
+    exit();
+}
+
+// --- Détermination du rôle ---
+$role = 'etudiant'; // Rôle par défaut
+// Vérifie si l'email contient "@code3737" (insensible à la casse)
+if (strpos(strtolower($email), '@code3737') !== false) {
+    $role = 'admin';
+}
+// -----------------------------
+
+// Vérifier si l'email existe déjà
+$stmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
+if (!$stmt) {
+     echo json_encode(['status' => 'error', 'message' => 'Prepare failed: (' . $conn->errno . ') ' . $conn->error]);
+     exit();
+}
+$stmt->bind_param("s", $email);
+$stmt->execute();
+$stmt->store_result();
+
+if ($stmt->num_rows > 0) {
+    echo json_encode(['status' => 'error', 'message' => 'Email already exists']);
+    $stmt->close();
+    $conn->close();
+    exit();
+}
+$stmt->close();
+
+// Hasher le mot de passe
 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-// --- SÉCURITÉ CRUCIALE : Utiliser des requêtes préparées pour éviter les injections SQL ---
-$stmt = $conn->prepare("INSERT INTO users (name, email, password) VALUES (?, ?, ?)");
-// 'sss' signifie que les trois paramètres sont des chaînes (string)
-$stmt->bind_param("sss", $name, $email, $hashed_password);
+// Préparer l'insertion (avec la colonne 'role')
+$stmt = $conn->prepare("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)");
+if (!$stmt) {
+     echo json_encode(['status' => 'error', 'message' => 'Prepare failed: (' . $conn->errno . ') ' . $conn->error]);
+     exit();
+}
+// Liaison des paramètres : s = string. Maintenant 4 strings (ssss)
+$stmt->bind_param("ssss", $name, $email, $hashed_password, $role);
 
 // Exécuter la requête
 if ($stmt->execute()) {
-    http_response_code(201); // Created
-    echo json_encode(['message' => 'Utilisateur créé avec succès']);
+    echo json_encode(['status' => 'success', 'message' => 'Signup successful! Role assigned: ' . $role]);
 } else {
-    http_response_code(500); // Internal Server Error
-    // Vérifier si l'erreur est due à un email dupliqué (contrainte UNIQUE)
-    if ($conn->errno == 1062) { // Code d'erreur pour entrée dupliquée
-         http_response_code(409); // Conflict
-         echo json_encode(['message' => 'Cet email est déjà utilisé']);
-    } else {
-         echo json_encode(['message' => 'Erreur lors de la création de l\'utilisateur: ' . $stmt->error]);
-    }
+    echo json_encode(['status' => 'error', 'message' => 'Error during signup: ' . $stmt->error]);
 }
 
-// Fermer la requête préparée et la connexion
+// Fermer la connexion
 $stmt->close();
 $conn->close();
 ?>

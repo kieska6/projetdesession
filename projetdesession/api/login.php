@@ -1,66 +1,74 @@
 <?php
-    // Autoriser les requêtes depuis votre serveur de développement React (IMPORTANT pour CORS)
-    header("Access-Control-Allow-Origin: http://localhost:3000"); // Adaptez le port si nécessaire
-    header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
-    header("Access-Control-Allow-Headers: Content-Type, Authorization");
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+header('Content-Type: application/json');
 
-    // Gérer la requête OPTIONS (pré-vérification CORS)
-    if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
-        exit(0);
-    }
+// Connexion DB (identique à signup.php)
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "projetdesession";
 
-    // Connexion à la base de données
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "projetdesession";
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-    $conn = new mysqli($servername, $username, $password, $dbname);
+if ($conn->connect_error) {
+    echo json_encode(['status' => 'error', 'message' => 'Connection failed: ' . $conn->connect_error]);
+    exit();
+}
 
-    if ($conn->connect_error) {
-        http_response_code(500);
-        echo json_encode(['message' => 'Erreur de connexion: ' . $conn->connect_error]);
-        exit();
-    }
+// Récupérer les données POST (JSON)
+$data = json_decode(file_get_contents('php://input'), true);
 
-    // Récupérer les données envoyées par React
-    $input = json_decode(file_get_contents('php://input'), true);
+if (!$data || !isset($data['email']) || !isset($data['password'])) {
+    echo json_encode(['status' => 'error', 'message' => 'Invalid input data']);
+    exit();
+}
 
-    if (!isset($input['email']) || !isset($input['password'])) {
-        http_response_code(400);
-        echo json_encode(['message' => 'Données manquantes']);
-        exit();
-    }
+$email = trim($data['email']);
+$password = trim($data['password']);
 
-    $email = $input['email'];
-    $password_attempt = $input['password'];
+if (empty($email) || empty($password)) {
+    echo json_encode(['status' => 'error', 'message' => 'Please fill all fields']);
+    exit();
+}
 
-    // --- SÉCURITÉ : Utiliser des requêtes préparées ---
-    $stmt = $conn->prepare("SELECT id, name, password FROM users WHERE email = ?");
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $result = $stmt->get_result();
+// Préparer la sélection (inclure 'role' et d'autres infos utiles comme 'id', 'name')
+$stmt = $conn->prepare("SELECT id, name, email, password, role FROM users WHERE email = ?");
+if (!$stmt) {
+     echo json_encode(['status' => 'error', 'message' => 'Prepare failed: (' . $conn->errno . ') ' . $conn->error]);
+     exit();
+}
+$stmt->bind_param("s", $email);
+$stmt->execute();
+$result = $stmt->get_result();
 
-    if ($result->num_rows === 1) {
-        $user = $result->fetch_assoc();
-        // --- SÉCURITÉ : Vérifier le mot de passe hashé ---
-        if (password_verify($password_attempt, $user['password'])) {
-            // Mot de passe correct
-            http_response_code(200);
-            // Ne renvoyez JAMAIS le hash du mot de passe au client
-            echo json_encode(['message' => 'Connexion réussie', 'user' => ['id' => $user['id'], 'name' => $user['name'], 'email' => $email]]);
-            // Ici, vous pourriez générer un token JWT ou démarrer une session PHP
-        } else {
-            // Mot de passe incorrect
-            http_response_code(401); // Unauthorized
-            echo json_encode(['message' => 'Email ou mot de passe incorrect']);
-        }
+if ($result->num_rows === 1) {
+    $user = $result->fetch_assoc();
+
+    // Vérifier le mot de passe
+    if (password_verify($password, $user['password'])) {
+        // Mot de passe correct - Renvoyer les infos utilisateur (sans le hash du mdp)
+        echo json_encode([
+            'status' => 'success',
+            'message' => 'Login successful',
+            // Renvoyer un objet 'user' avec les infos nécessaires au frontend
+            'user' => [
+                'id' => $user['id'],
+                'name' => $user['name'],
+                'email' => $user['email'],
+                'role' => $user['role'] // <-- Renvoyer le rôle !
+            ]
+        ]);
     } else {
-        // Utilisateur non trouvé
-        http_response_code(401); // Unauthorized
-        echo json_encode(['message' => 'Email ou mot de passe incorrect']);
+        // Mot de passe incorrect
+        echo json_encode(['status' => 'error', 'message' => 'Invalid email or password']);
     }
+} else {
+    // Email non trouvé
+    echo json_encode(['status' => 'error', 'message' => 'Invalid email or password']);
+}
 
-    $stmt->close();
-    $conn->close();
+$stmt->close();
+$conn->close();
 ?>
