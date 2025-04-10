@@ -2,96 +2,183 @@
 
 /* Conteneur spécifique pour la page d'accueil, si besoin de styles uniques */
 .home-container {
-    /* Hérite des styles .page de App.css */
-    /* Ajoutez des styles spécifiques ici si nécessaire */
-  }
-  
-  /* Style pour la section bannière */
-  .home-banner {
-    position: relative; /* Nécessaire pour positionner le texte par-dessus */
-    text-align: center;
-    color: white;
-    margin-bottom: 2rem; /* Espace après la bannière */
-    border-radius: 12px; /* Correspond au radius de .page */
-    overflow: hidden; /* Assure que l'image ne dépasse pas les coins arrondis */
-  }
-  
-  /* Style pour l'image de la bannière */
-  .banner-image {
-    display: block; /* Supprime l'espace sous l'image */
-    width: 100%;
-    height: auto; /* Maintient le ratio */
-    max-height: 400px; /* Limite la hauteur */
-    object-fit: cover; /* Assure que l'image couvre la zone sans se déformer */
-  }
-  
-  /* Style pour le texte superposé sur la bannière */
+  /* Hérite des styles .page de App.css */
+  /* Ajoutez des styles spécifiques ici si nécessaire */
+}
+
+/* Style pour la section bannière */
+.home-banner {
+  position: relative; /* Nécessaire pour positionner le texte par-dessus */
+  text-align: center;
+  color: white;
+  margin-bottom: 3rem; /* Augmenté l'espace après la bannière */
+  border-radius: 12px; /* Correspond au radius de .page */
+  overflow: hidden; /* Assure que l'image ne dépasse pas les coins arrondis */
+}
+
+/* Style pour l'image de la bannière */
+.banner-image {
+  display: block; /* Supprime l'espace sous l'image */
+  width: 100%;
+  height: auto; /* Maintient le ratio */
+  max-height: 400px; /* Limite la hauteur */
+  object-fit: cover; /* Assure que l'image couvre la zone sans se déformer */
+  filter: brightness(0.8); /* Assombrit légèrement l'image pour le contraste */
+}
+
+/* Style pour le texte superposé sur la bannière */
+.banner-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.65); /* Fond sombre semi-transparent un peu plus opaque */
+  padding: 1.5rem 2.5rem;
+  border-radius: 8px;
+  width: 80%; /* Prend 80% de la largeur de la bannière */
+  max-width: 700px; /* Limite la largeur maximale du texte */
+}
+
+.banner-text h2 {
+  margin-bottom: 0.5rem;
+  font-size: 2.2rem; /* Taille de titre adaptée */
+  color: white; /* Assure que le texte est blanc */
+  font-weight: 700;
+}
+
+.banner-text p {
+  font-size: 1.1rem;
+  margin-bottom: 0; /* Annule le margin par défaut */
+  color: #f0f0f0; /* Blanc légèrement cassé */
+}
+
+/* --- NOUVEAUX STYLES POUR L'APERÇU DU PROGRAMME --- */
+
+.program-preview-section {
+  border: 1px solid #e0e0e0; /* Bordure légère */
+}
+
+.program-preview-section h2 {
+  color: var(--primary); /* Titre de section en couleur primaire */
+  font-weight: 600;
+}
+
+.program-preview-section .lead {
+  color: #555;
+  font-size: 1.1rem;
+}
+
+.key-features {
+  /* Utilise les classes .row et .col de Bootstrap pour la disposition */
+}
+
+.feature-item {
+  /* Styles pour chaque bloc de fonctionnalité */
+  /* background-color: white; */ /* Optionnel si la section a déjà un fond */
+  /* border-radius: 8px; */ /* Optionnel */
+  /* box-shadow: 0 2px 5px rgba(0,0,0,0.05); */ /* Optionnel */
+  transition: transform 0.3s ease; /* Effet de survol */
+}
+
+.feature-item:hover {
+  transform: translateY(-5px); /* Léger soulèvement au survol */
+}
+
+.feature-item i.fas { /* Style pour les icônes Font Awesome */
+  font-size: 2.5rem; /* Taille des icônes (ajusté de fa-3x) */
+  margin-bottom: 1rem; /* Espace sous l'icône */
+  color: var(--primary); /* Couleur des icônes */
+}
+
+.feature-item h4 {
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: 0.5rem;
+}
+
+.feature-item p {
+  font-size: 0.95rem;
+  color: #666;
+  line-height: 1.5;
+}
+
+.program-preview-section .btn-primary {
+  /* Styles spécifiques pour le bouton si nécessaire */
+  padding: 0.8rem 2rem; /* Taille du bouton */
+  font-weight: 600;
+}
+
+.program-preview-section .btn-primary i.fas {
+  font-size: 0.9em; /* Taille de la flèche */
+  vertical-align: middle;
+}
+
+/* --- FIN DES NOUVEAUX STYLES --- */
+
+
+/* Style pour le message invitant à se connecter */
+.login-prompt {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 1.1em;
+  padding: 1rem;
+  background-color: #eef2f7; /* Fond léger pour le message */
+  border-radius: 8px;
+}
+
+.login-prompt a {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.login-prompt a:hover {
+  text-decoration: underline;
+}
+
+/* Styles pour d'autres sections de la page d'accueil */
+.home-about-section {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid #eee;
+}
+
+.home-about-section h3 {
+  color: var(--primary);
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
   .banner-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.6); /* Fond sombre semi-transparent */
-    padding: 1.5rem 2.5rem;
-    border-radius: 8px;
-    width: 80%; /* Prend 80% de la largeur de la bannière */
-    max-width: 700px; /* Limite la largeur maximale du texte */
+    padding: 1rem 1.5rem;
+    width: 90%;
   }
-  
   .banner-text h2 {
-    margin-bottom: 0.5rem;
-    font-size: 2rem; /* Taille de titre adaptée */
-    color: white; /* Assure que le texte est blanc */
+    font-size: 1.8rem; /* Ajusté */
   }
-  
   .banner-text p {
+    font-size: 1rem;
+  }
+
+  .program-preview-section h2 {
+    font-size: 1.6rem;
+  }
+  .program-preview-section .lead {
+    font-size: 1rem;
+  }
+  .feature-item i.fas {
+    font-size: 2rem; /* Icônes plus petites sur mobile */
+  }
+  .feature-item h4 {
     font-size: 1.1rem;
-    margin-bottom: 0; /* Annule le margin par défaut */
-    color: white; /* Assure que le texte est blanc */
   }
-  
-  /* Style pour le message invitant à se connecter */
-  .login-prompt {
-    text-align: center;
-    margin-top: 2rem;
-    font-size: 1.1em;
-    padding: 1rem;
-    background-color: #eef2f7; /* Fond léger pour le message */
-    border-radius: 8px;
+  .feature-item p {
+    font-size: 0.9rem;
   }
-  
-  .login-prompt a {
-    color: var(--primary);
-    font-weight: 600;
-    text-decoration: none;
+  .program-preview-section .btn-lg {
+    font-size: 1rem; /* Bouton légèrement plus petit */
+    padding: 0.7rem 1.5rem;
   }
-  
-  .login-prompt a:hover {
-    text-decoration: underline;
-  }
-  
-  /* Styles pour d'autres sections de la page d'accueil */
-  .home-about-section {
-    margin-top: 3rem;
-    padding-top: 2rem;
-    border-top: 1px solid #eee;
-  }
-  
-  .home-about-section h3 {
-    color: var(--primary);
-    margin-bottom: 1rem;
-  }
-  
-  /* Responsive pour la bannière */
-  @media (max-width: 768px) {
-    .banner-text {
-      padding: 1rem 1.5rem;
-      width: 90%;
-    }
-    .banner-text h2 {
-      font-size: 1.5rem;
-    }
-    .banner-text p {
-      font-size: 1rem;
-    }
-  }
+}

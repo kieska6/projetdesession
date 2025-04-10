@@ -1,28 +1,166 @@
 /* src/Program.css */
 
-.program-page {
-    border-left: 5px solid var(--info); /* Couleur distinctive */
-    background-color: #f7faff; /* Fond léger bleuâtre */
+/* Style général pour la page programme */
+.program-page-container {
+  padding-top: 2rem; /* Espace sous le header principal */
+  padding-bottom: 3rem; /* Espace avant le footer */
+}
+
+/* En-tête de la page programme */
+.program-header h1 {
+  color: var(--primary); /* Utilise la couleur primaire définie dans App.css ou ailleurs */
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.program-header .lead {
+  font-size: 1.2rem;
+  color: #555;
+  max-width: 800px; /* Limite la largeur du sous-titre */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Style commun pour les sections */
+.program-section {
+  margin-bottom: 2.5rem; /* Espace entre les sections */
+}
+
+.program-section h2 {
+  color: var(--dark); /* Couleur foncée pour les titres de section */
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  display: flex; /* Pour aligner l'icône et le texte */
+  align-items: center;
+}
+
+/* Style pour les icônes Font Awesome dans les titres h2 */
+.program-section h2 .fas,
+.program-section h2 .fab, /* Ajoutez d'autres préfixes si nécessaire */
+.program-section h2 .far {
+  color: var(--primary); /* Couleur primaire pour les icônes */
+  margin-right: 0.75rem; /* Espace entre l'icône et le texte */
+  font-size: 1.5rem; /* Taille de l'icône */
+  width: 30px; /* Largeur fixe pour l'alignement */
+  text-align: center;
+}
+
+/* Style pour les listes à puces dans les sections */
+.program-section ul {
+  list-style: none; /* Enlève les puces par défaut */
+  padding-left: 0; /* Enlève le padding par défaut */
+}
+
+.program-section ul li {
+  position: relative;
+  padding-left: 1.8rem; /* Espace pour l'icône personnalisée */
+  margin-bottom: 0.8rem; /* Espace entre les items */
+  line-height: 1.6;
+  color: #333; /* Couleur de texte légèrement plus foncée */
+}
+
+/* Ajoute une icône personnalisée (checkmark) avant chaque item de liste */
+.program-section ul li::before {
+  content: '\f00c'; /* Code Font Awesome pour checkmark */
+  font-family: 'Font Awesome 5 Free', 'Font Awesome 5 Brands', 'Font Awesome 5 Solid'; /* Assurez-vous que la police est chargée */
+  font-weight: 900; /* Solid style */
+  position: absolute;
+  left: 0;
+  top: 4px; /* Ajustement vertical */
+  color: var(--success); /* Couleur verte (succès) */
+  font-size: 0.9rem;
+}
+
+/* Personnalisation légère de l'accordéon Bootstrap */
+.accordion-button {
+  font-weight: 600;
+  color: var(--dark);
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: rgba(var(--primary-rgb), 0.1); /* Fond léger quand ouvert */
+  color: var(--primary);
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .125);
+}
+
+.accordion-button:focus {
+  box-shadow: 0 0 0 0.25rem rgba(var(--primary-rgb), 0.25); /* Ombre focus */
+  border-color: rgba(var(--primary-rgb), 0.5);
+}
+
+.accordion-body {
+  background-color: #fdfdfd; /* Fond très légèrement différent pour le corps */
+  padding: 1.5rem;
+}
+
+/* Style pour la liste des technologies */
+.tech-list {
+  gap: 0.75rem; /* Espace entre les badges */
+}
+
+.tech-list .badge {
+  font-size: 0.9rem; /* Taille de police légèrement plus grande pour les badges */
+  padding: 0.6em 1em; /* Plus de padding */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Légère ombre */
+}
+
+/* Section d'appel à l'action (CTA) */
+.program-cta {
+  background-color: var(--primary); /* Utilise la couleur primaire */
+  color: white;
+  border-radius: 10px; /* Coins arrondis */
+}
+
+.program-cta h2 {
+  color: white; /* Titre en blanc */
+  font-weight: 700;
+}
+
+.program-cta p {
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+/* Assurez-vous que les icônes dans le CTA sont blanches si vous en ajoutez */
+.program-cta h2 .fas {
+  color: white;
+}
+
+/* Styles responsifs */
+@media (max-width: 768px) {
+  .program-header h1 {
+    font-size: 2rem;
   }
-  
-  .program-page h1 {
-    color: var(--info);
-    border-bottom: 2px solid var(--info);
-    padding-bottom: 0.5rem;
-    margin-bottom: 1.5rem;
+  .program-header .lead {
+    font-size: 1rem;
   }
-  
-  .program-page section {
-    margin-top: 1.5rem;
-    padding: 1rem;
-    background-color: #fff;
-    border-radius: 8px;
-    border: 1px solid #e0e7ff;
+  .program-section h2 {
+    font-size: 1.5rem;
   }
-  
-  .program-page h2 {
-    color: var(--primary-dark);
-    margin-bottom: 0.8rem;
+   .program-section h2 .fas {
+     font-size: 1.3rem;
+   }
+  .program-section ul li {
+    padding-left: 1.5rem;
+    margin-bottom: 0.6rem;
   }
-  
-  /* Ajoutez d'autres styles spécifiques ici */
+  .program-section ul li::before {
+    top: 5px;
+    font-size: 0.8rem;
+  }
+  .tech-list .badge {
+    font-size: 0.8rem;
+    padding: 0.5em 0.8em;
+  }
+  .program-cta {
+    padding: 3rem 1.5rem !important; /* Ajuste le padding sur mobile */
+  }
+  .program-cta .btn {
+    margin-bottom: 0.5rem; /* Empile les boutons sur mobile */
+    display: block; /* Force les boutons à prendre toute la largeur */
+    width: 100%;
+  }
+  .program-cta .btn.me-3 {
+    margin-right: 0 !important; /* Annule la marge droite sur mobile */
+  }
+}

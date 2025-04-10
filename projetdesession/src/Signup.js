@@ -1,84 +1,137 @@
+// src/Signup.js
 import React, { useState } from 'react';
-import './Signup.css';
-import { Link, useNavigate } from 'react-router-dom'; // Importer useNavigate
+import { Link, useNavigate } from 'react-router-dom';
+import './Signup.css'; // Assurez-vous d'importer les styles
 
 function Signup() {
-    const [values, setValues] = useState({
-        name: '',
-        email: '',
-        password: ''
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState(''); // Pour afficher un message de succès
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setError('');
+    setSuccess('');
+    setLoading(true);
+
+    // Validation simple côté client
+    if (!name || !email || !password) {
+      setError('Veuillez remplir tous les champs.');
+      setLoading(false);
+      return;
+    }
+    // Vous pouvez ajouter une validation plus poussée (ex: force du mot de passe)
+
+    // Appel à votre API PHP d'inscription
+    fetch('http://localhost/projetdesession/projetdesession/api/signup.php', { // <-- !! METTEZ VOTRE URL CORRECTE !!
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name, email, password }), // On n'envoie pas le rôle, il est déterminé côté serveur
+    })
+    .then(response => {
+      // Vérifier si la réponse est OK (status 200-299)
+      if (!response.ok) {
+         return response.json().then(errData => {
+           throw new Error(errData.message || `Erreur HTTP ${response.status}`);
+         }).catch(() => {
+           throw new Error(`Erreur HTTP ${response.status}`);
+         });
+      }
+      return response.json();
+    })
+    .then(data => {
+      setLoading(false);
+      if (data.status === 'success') {
+        // Inscription réussie !
+        console.log('Signup successful:', data.message); // Le message peut contenir le rôle attribué
+        setSuccess('Inscription réussie ! Vous allez être redirigé vers la page de connexion.');
+        setError(''); // Effacer les erreurs précédentes
+
+        // Rediriger vers la page de connexion après un court délai
+        setTimeout(() => {
+          navigate('/login');
+        }, 2000); // Délai de 2 secondes pour lire le message
+
+      } else {
+        // Afficher le message d'erreur du serveur
+        setError(data.message || 'Échec de l\'inscription.');
+        setSuccess('');
+      }
+    })
+    .catch(error => {
+      setLoading(false);
+      console.error('Signup error:', error);
+      setError(error.message || 'Une erreur est survenue lors de l\'inscription.');
+      setSuccess('');
     });
-    const navigate = useNavigate(); // Hook pour la redirection
-    const [error, setError] = useState(''); // Pour afficher les erreurs
+  };
 
-    const handleInput = (event) => {
-        setValues(prev => ({ ...prev, [event.target.name]: event.target.value }));
-    };
-
-    const handleSubmit = async (event) => {
-        event.preventDefault(); // Empêche le rechargement de la page
-        setError(''); // Réinitialiser l'erreur
-
-        try {
-            // URL de votre script PHP signup
-            const apiUrl = 'http://localhost/projetdesession/projetdesession/api/signup.php'; // Adaptez le chemin
-
-            const response = await fetch(apiUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json', // Indiquer qu'on envoie du JSON
-                },
-                body: JSON.stringify(values), // Convertir les données JS en chaîne JSON
-            });
-
-            const result = await response.json(); // Lire la réponse JSON du serveur
-
-            if (response.ok) { // Vérifier si le statut HTTP est OK (2xx)
-                console.log("Signup successful:", result);
-                // Rediriger vers la page de connexion après succès
-                navigate('/login');
-            } else {
-                // Gérer les erreurs renvoyées par le serveur (4xx, 5xx)
-                console.error("Signup failed:", result.message);
-                setError(result.message || 'Une erreur est survenue lors de l\'inscription.');
-            }
-
-        } catch (err) {
-            // Gérer les erreurs réseau ou autres erreurs JS
-            console.error("Network or other error:", err);
-            setError('Impossible de contacter le serveur. Vérifiez votre connexion.');
-        }
-    };
-
-    return (
-        // ... (votre JSX de formulaire reste le même)
-        <div className='d-flex justify-content-center align-items-center bg-primary vh-100'>
-            <div className='bg-white p-3 rounded w-25'>
-                <h2>Creer un compte</h2>
-                {error && <div className="alert alert-danger">{error}</div>} {/* Afficher l'erreur */}
-                <form onSubmit={handleSubmit}>
-                    <div className='mb-3'>
-                        <label htmlFor="name"><strong>Nom</strong></label>
-                        <input type="text" placeholder='Enter Name' name='name'
-                            onChange={handleInput} className='form-control rounded-0' required />
-                    </div>
-                    <div className='mb-3'>
-                        <label htmlFor="email"><strong>Email</strong></label>
-                        <input type="email" placeholder='Enter Email' name='email'
-                            onChange={handleInput} className='form-control rounded-0' required />
-                    </div>
-                    <div className='mb-3'>
-                        <label htmlFor="password"><strong>Mot de passe</strong></label>
-                        <input type="password" placeholder='Enter Password' name='password'
-                            onChange={handleInput} className='form-control rounded-0' required />
-                    </div>
-                    <button type='submit' className='btn btn-success w-100 rounded-0'>Creer un compte</button>
-                    <p>You agree to our terms and policies</p>
-                    <Link to="/login" className='btn btn-default border w-100 bg-light rounded-0 text-decoration-none'>Se connecter</Link>
-                </form>
-            </div>
-        </div>
-    );
+  return (
+    // Appliquez vos classes CSS pour la mise en page (ex: signup-page-container)
+    <div className="signup-page-container d-flex justify-content-center align-items-center vh-100">
+      {/* Appliquez vos classes CSS pour la carte (ex: signup-auth-card) */}
+      <div className="signup-auth-card bg-white p-4 rounded shadow-sm">
+        <h2 className="text-center mb-4">Inscription</h2>
+        <form onSubmit={handleSubmit}>
+          {error && <div className="alert alert-danger">{error}</div>}
+          {success && <div className="alert alert-success">{success}</div>}
+          {/* Appliquez vos classes CSS pour les groupes de formulaire (ex: signup-form-group) */}
+          <div className="signup-form-group mb-3">
+            <label htmlFor="name">Nom complet</label>
+            <input
+              type="text"
+              className="form-control" // Ou votre classe personnalisée
+              id="name"
+              name="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              disabled={loading}
+            />
+          </div>
+          <div className="signup-form-group mb-3">
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              className="form-control" // Ou votre classe personnalisée
+              id="email"
+              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              disabled={loading}
+            />
+          </div>
+          <div className="signup-form-group mb-3">
+            <label htmlFor="password">Mot de passe</label>
+            <input
+              type="password"
+              className="form-control" // Ou votre classe personnalisée
+              id="password"
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              disabled={loading}
+            />
+          </div>
+          {/* Appliquez vos classes CSS pour les boutons (ex: signup-btn signup-btn-primary) */}
+          <button type="submit" className="signup-btn signup-btn-primary w-100 mb-2" disabled={loading}>
+            {loading ? 'Inscription en cours...' : 'S\'inscrire'}
+          </button>
+          <p className="text-center mt-3">
+            Déjà un compte ? <Link to="/login">Connectez-vous</Link>
+          </p>
+        </form>
+      </div>
+    </div>
+  );
 }
 
 export default Signup;

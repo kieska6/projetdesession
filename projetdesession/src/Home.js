@@ -1,72 +1,78 @@
-// src/Home.js
-import React, { useState, useEffect } from 'react';
-import './Home.css';
-import { Link } from 'react-router-dom'; // Importez Link pour la navigation
+import React from 'react';
+import { Link } from 'react-router-dom';
+import './Home.css'; 
 
-// Optionnel : Si vous créez un fichier Home.css, importez-le
-// import './Home.css';
+// Importez une image pour la bannière (ou utilisez une URL)
+import bannerImage from '/Applications/XAMPP/xamppfiles/htdocs/projetdesession/projetdesession/src/code.jpg'; 
 
 function Home() {
-  // État simple pour savoir si l'utilisateur est considéré comme connecté
-  // (Basé sur la présence d'infos dans localStorage, par exemple)
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  // Vérifier l'état de connexion au chargement du composant
-  useEffect(() => {
-    // Adaptez cette logique à la manière dont vous stockez l'état de connexion
-    // Par exemple, vérifiez si un token ou un objet utilisateur existe
-    const userLoggedIn = localStorage.getItem('authToken') || localStorage.getItem('user'); // Exemple
-    if (userLoggedIn) {
-      setIsLoggedIn(true);
-    } else {
-      setIsLoggedIn(false);
-    }
-  }, []); // Le tableau vide assure que cela ne s'exécute qu'une fois au montage
+  // Vous pourriez récupérer l'état de connexion ici si nécessaire pour afficher/masquer le prompt
+  // const currentUser = JSON.parse(localStorage.getItem('user'));
 
   return (
-    // Vous pouvez ajouter une classe CSS spécifique pour la page d'accueil si besoin
-    <div id="home" className="page home-container" style={{ padding: '20px' }}> {/* Ajout d'un padding pour l'espacement */}
+    <div className="home-container container mt-4 mb-5"> {/* Utilise container Bootstrap + marges */}
 
       {/* Section Bannière */}
-      <div className="home-banner" style={{ position: 'relative', textAlign: 'center', color: 'white', marginBottom: '20px' }}>
-        <img
-          src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
-          // Il est préférable de gérer width/height via CSS pour la responsivité
-          style={{ width: '100%', height: 'auto', maxHeight: '400px', objectFit: 'cover', display: 'block', borderRadius: '8px' }}
-          alt="Étudiants en programmation"
-          className="banner-image"
-        />
-        {/* Superposition de texte simple */}
-        <div className="banner-text" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', backgroundColor: 'rgba(0, 0, 0, 0.6)', padding: '20px 40px', borderRadius: '8px' }}>
+      <section className="home-banner shadow-sm"> {/* Ajout d'une légère ombre */}
+        <img src={bannerImage} alt="Bannière Code3737" className="banner-image" />
+        <div className="banner-text">
           <h2>Bienvenue chez Code3737</h2>
-          <p>Découvrez notre programme de formation exceptionnel conçu pour vous préparer aux carrières technologiques de demain.</p>
+          <p>Votre tremplin vers une carrière réussie dans le développement web et mobile.</p>
         </div>
-      </div>
+      </section>
 
-      {/* Message de connexion conditionnel */}
-      {!isLoggedIn && (
-        <p className="login-prompt" style={{ textAlign: 'center', marginTop: '30px', fontSize: '1.1em' }}>
-          Pour accéder à toutes les fonctionnalités, veuillez{' '}
-          {/* Utilisation de Link pour naviguer vers la page de connexion */}
-          <Link to="/login" style={{ color: '#007bff', textDecoration: 'underline' }}>
-            vous connecter
-          </Link>.
+      {/* Section Aperçu du Programme */}
+      <section className="program-preview-section text-center p-4 p-md-5 mb-5 bg-light rounded shadow-sm">
+        <h2 className="mb-4">Découvrez Notre Programme Intensif</h2>
+        <p className="lead mb-4">
+          Acquérez les compétences les plus demandées en développement Full-Stack et lancez votre carrière tech.
         </p>
-      )}
+        <div className="row justify-content-center key-features mb-4">
+          {/* Feature 1 */}
+          <div className="col-md-4 mb-3">
+            <div className="feature-item p-3">
+              <i className="fas fa-laptop-code fa-3x text-primary mb-3"></i> {/* Icône */}
+              <h4 className="h5">Frontend Moderne</h4>
+              <p>Maîtrisez HTML, CSS, JavaScript et React pour créer des interfaces utilisateur interactives.</p>
+            </div>
+          </div>
+          {/* Feature 2 */}
+          <div className="col-md-4 mb-3">
+            <div className="feature-item p-3">
+              <i className="fas fa-server fa-3x text-primary mb-3"></i> {/* Icône */}
+              <h4 className="h5">Backend Robuste</h4>
+              <p>Apprenez Node.js, Express et les bases de données (SQL/NoSQL) pour construire des APIs performantes.</p>
+            </div>
+          </div>
+          {/* Feature 3 */}
+          <div className="col-md-4 mb-3">
+            <div className="feature-item p-3">
+              <i className="fas fa-briefcase fa-3x text-primary mb-3"></i> {/* Icône */}
+              <h4 className="h5">Prêt pour l'Emploi</h4>
+              <p>Développez un portfolio solide et bénéficiez d'un accompagnement carrière personnalisé.</p>
+            </div>
+          </div>
+        </div>
+        <Link to="/programme" className="btn btn-primary btn-lg">
+          Voir le Programme Complet <i className="fas fa-arrow-right ms-2"></i>
+        </Link>
+      </section>
 
-      {/* Message de bienvenue si connecté */}
-      {isLoggedIn && (
-         <p style={{ textAlign: 'center', marginTop: '30px', fontSize: '1.1em', color: 'green' }}>
-           Vous êtes connecté ! Explorez les fonctionnalités disponibles via la navigation (si ajoutée).
-         </p>
-      )}
+      {/* Section "À propos" ou autre contenu */}
+      <section className="home-about-section mb-5">
+        <h3>Qui Sommes-Nous ?</h3>
+        <p>
+          Code3737 est plus qu'une simple formation ; c'est une communauté dédiée à former la prochaine génération de développeurs talentueux. Nous combinons une pédagogie axée sur la pratique avec un mentorat de qualité pour assurer votre succès.
+        </p>
+        {/* Ajoutez plus de contenu ici si nécessaire */}
+      </section>
 
-      {/* Ajoutez ici d'autres contenus statiques ou dynamiques pour la page d'accueil */}
-      <div style={{ marginTop: '40px', padding: '20px', borderTop: '1px solid #eee' }}>
-          <h3>À propos de notre formation</h3>
-          <p>Nous proposons des cursus intensifs et pratiques pour maîtriser les technologies web et mobiles les plus demandées sur le marché.</p>
-          {/* Plus de contenu... */}
-      </div>
+      {/* Message invitant à se connecter (optionnel, dépend si l'utilisateur est connecté) */}
+      {/* {!currentUser && (
+        <div className="login-prompt">
+          Déjà membre ? <Link to="/login">Connectez-vous</Link> pour accéder à votre espace.
+        </div>
+      )} */}
 
     </div>
   );
